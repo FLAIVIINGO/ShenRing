@@ -6,13 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		969538432D75531E009CCF02 /* MultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969538422D75531E009CCF02 /* MultipleChoice.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		969538312D74EA75009CCF02 /* ShenRing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShenRing.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		969538422D75531E009CCF02 /* MultipleChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -37,7 +32,6 @@
 		969538282D74EA75009CCF02 = {
 			isa = PBXGroup;
 			children = (
-				969538422D75531E009CCF02 /* MultipleChoice.swift */,
 				969538332D74EA75009CCF02 /* ShenRing */,
 				969538322D74EA75009CCF02 /* Products */,
 			);
@@ -125,7 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				969538432D75531E009CCF02 /* MultipleChoice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
