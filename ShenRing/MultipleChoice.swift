@@ -7,19 +7,40 @@
 
 import Foundation
 
-struct MultipleChoice<CardContent> {
-    private(set) var cards: Array<Card>
+struct MultipleChoice {
+    private(set) var cards: [Card]
     
-    init(cardContentFactory: (Int) -> CardContent) {
-        cards = []
-        for i in 0..<4 {
-            let content = cardContentFactory(i)
-            cards.append(Card(content: content))
-        }
+    init(cards: [Card]) {
+        self.cards = cards
     }
     
+    static func fetchLocalCards() -> [Card] {
+            return [
+                Card(
+                    id: 1,
+                    hieroglyph: "𓃭",
+                    meaning: "lion",
+                    options: ["lion", "cat", "dog", "bird"]
+                ),
+                Card(
+                    id: 2,
+                    hieroglyph: "𓆣",
+                    meaning: "scarab",
+                    options: ["scarab", "beetle", "fly", "ant"]
+                ),
+                Card(
+                    id: 3,
+                    hieroglyph: "𓂀",
+                    meaning: "eye",
+                    options: ["eye", "hand", "foot", "mouth"]
+                )
+            ]
+        }
+    
     struct Card {
-        var isSelected = false
-        var content: CardContent
+        let id: Int
+        let hieroglyph: String
+        let meaning: String
+        let options: [String]
     }
 }

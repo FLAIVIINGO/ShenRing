@@ -8,28 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
-    let hieros = ["𓃲","𓅋","𓆣","𓏢"]
+    @StateObject private var viewModel = UniliteralMultipleChoice()
     
     var body: some View {
         VStack {
-            cards
+            // Display the current hieroglyph
+            Text(viewModel.currentCard.hieroglyph)
+                .font(.system(size: 100))
+                .padding()
+            
+            // Display the options in a grid
+            optionsGrid
+            
+            // Display feedback
+            Text(viewModel.feedback)
+                .font(.headline)
+                .padding()
         }
         .padding(16)
     }
     
-    var cards: some View {
+    // Grid layout for options
+    var optionsGrid: some View {
         LazyVGrid(
-            columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
-            ForEach(0..<4, id: \.self) { index in
-                CardView(content: hieros[index])
+            columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)],
+            spacing: 16
+        ) {
+            ForEach(viewModel.options, id: \.self) { option in
+                CardView(isSelected: false, content: option)
                     .aspectRatio(2/3, contentMode: .fit)
+                    .onTapGesture {
+                        viewModel.checkAnswer(selectedOption: option)
+                    }
             }
         }
     }
 }
 
+// CardView for displaying options
 struct CardView: View {
-    @State var isSelected = false
+    @State var isSelected: Bool
     let content: String
     
     var body: some View {
