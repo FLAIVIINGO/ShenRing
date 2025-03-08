@@ -21,7 +21,7 @@ struct ContentView: View {
             optionsGrid
             
             // Display feedback
-            Text(viewModel.feedback)
+            Text("hello")
                 .font(.headline)
                 .padding()
         }
