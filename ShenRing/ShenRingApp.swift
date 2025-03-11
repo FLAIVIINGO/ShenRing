@@ -11,7 +11,7 @@ import SwiftUI
 struct ShenRingApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MultipleChoiceGameView(viewModel: MultipleChoiceGameViewModel(hieroglyphs: ["𓀀","𓁘","𓄃","𓂀"], correctIndex: 1))
         }
     }
 }
