@@ -9,13 +9,30 @@ import SwiftUI
 
 struct MultipleChoiceGameView: View {
     @ObservedObject var viewModel: UniliteralMultipleChoiceGame
+    @State private var showNotification = false
     
     var body: some View {
         VStack {
             Text("Which one of these is a scarab?").font(.title2)
             cards
+            Button(action: {
+                showNotification.toggle()
+            }, label: {
+                Text("Check")
+                    .frame(maxWidth: .infinity)
+            })
+            .buttonStyle(.bordered)
+            .disabled(viewModel.isCheckEnabled ? false : true)
         }
         .padding()
+        .overlay(
+            Group {
+                if showNotification {
+                    QuestionFeedbackView(text: "Correct!")
+                }
+            }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+        )
     }
     
     var cards: some View {
