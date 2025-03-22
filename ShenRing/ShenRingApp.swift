@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ShenRingApp: App {
+    @StateObject var game = UniliteralMultipleChoiceGame()
     var body: some Scene {
         WindowGroup {
-            MultipleChoiceGameView(viewModel: MultipleChoiceGameViewModel(hieroglyphs: ["𓀀","𓁘","𓄃","𓂀"], correctIndex: 1))
+            MultipleChoiceGameView(viewModel: game)
         }
     }
 }

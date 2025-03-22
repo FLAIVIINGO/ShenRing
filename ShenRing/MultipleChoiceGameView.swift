@@ -8,69 +8,54 @@
 import SwiftUI
 
 struct MultipleChoiceGameView: View {
-    @ObservedObject var viewModel: MultipleChoiceGameViewModel
+    @ObservedObject var viewModel: UniliteralMultipleChoiceGame
     
     var body: some View {
         VStack {
+            Text("Which one of these is a scarab?").font(.title2)
             cards
-            Button(action: {
-                let isCorrect = viewModel.checkAnswer()
-                print(isCorrect ? "Correct!" : "Incorrect!")
-            }, label: {
-                Text("Check")
-            })
-            .padding()
-            .buttonStyle(.borderedProminent)
-            .tint(viewModel.selectedIndex != nil ? .blue : .gray)
-            .disabled(viewModel.selectedIndex == nil)
         }
         .padding()
-        .background(Color(.systemGray6))
     }
     
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-            ForEach(0..<viewModel.hieroglyphs.count, id: \.self) { index in
-                CardView(
-                    content: viewModel.hieroglyphs[index],
-                    isSelected: Binding(
-                        get: { viewModel.selectedIndex == index },
-                        set: { isSelected in
-                            if isSelected {
-                                viewModel.selectCard(at: index)
-                            }
-                        }
-                    )
-                )
-                .aspectRatio(2/3, contentMode: .fit)
+            ForEach(viewModel.cards) { card in
+                CardView(card)
+                    .aspectRatio(2/3, contentMode: .fit)
+                    .padding(4)
+                    .onTapGesture {
+                        viewModel.choose(card)
+                    }
             }
         }
+        .foregroundColor(.black)
     }
 }
 
 struct CardView: View {
-    let content: String
-    @Binding var isSelected: Bool
+    let card: MultipleChoiceGame<String>.Card
+    
+    init(_ card: MultipleChoiceGame<String>.Card) {
+        self.card = card
+    }
     
     var body: some View {
         ZStack {
             let base = RoundedRectangle(cornerRadius: 12)
-
             Group {
                 base.foregroundColor(.white)
                 base.strokeBorder(lineWidth: 2)
-                    .foregroundColor(isSelected ? .blue : .clear)
-                Text(content)
-                    .font(.largeTitle)
-                    .foregroundColor(isSelected ? .blue : .black)
+                Text(card.content)
+                    .font(.system(size: 100))
+                    .minimumScaleFactor(0.01)
+                    .aspectRatio(1, contentMode: .fit)
             }
-        }
-        .onTapGesture {
-            isSelected.toggle()
+            .foregroundColor(card.isSelected ? .blue : .black)
         }
     }
 }
 
 #Preview {
-    MultipleChoiceGameView(viewModel: MultipleChoiceGameViewModel(hieroglyphs: ["𓀀","𓁘","𓄃","𓂀"], correctIndex: 1))
+    MultipleChoiceGameView(viewModel: UniliteralMultipleChoiceGame())
 }
