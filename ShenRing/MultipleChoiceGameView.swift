@@ -13,7 +13,7 @@ struct MultipleChoiceGameView: View {
     
     var body: some View {
         VStack {
-            Text("Which one of these is a scarab?").font(.title2)
+            Text("Which one of these is a pair of leaves?").font(.title2)
             cards
             Button(action: {
                 showNotification.toggle()
@@ -28,7 +28,7 @@ struct MultipleChoiceGameView: View {
         .overlay(
             Group {
                 if showNotification {
-                    QuestionFeedbackView(text: "Correct!")
+                    QuestionFeedbackView(text: "Correct!", status: true)
                 }
             }
                 .frame(maxHeight: .infinity, alignment: .bottom)

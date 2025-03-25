@@ -9,11 +9,12 @@ import SwiftUI
 
 struct QuestionFeedbackView: View {
     var text: String
+    var status: Bool
     
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "checkmark.circle.fill")
+                Image(systemName: status ? "checkmark.circle.fill" : "xmark.circle.fill")
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding()
@@ -35,7 +36,7 @@ struct QuestionFeedbackView: View {
             .padding(.bottom, 20)
         }
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.37)
-        .background(RoundedRectangle(cornerRadius: 12).fill(.green))
+        .background(RoundedRectangle(cornerRadius: 12).fill(status ? .green : .red))
         .transition(.move(edge: .bottom))
         .ignoresSafeArea()
     }

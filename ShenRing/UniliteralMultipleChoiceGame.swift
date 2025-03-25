@@ -8,7 +8,7 @@
 import SwiftUI
 
 class UniliteralMultipleChoiceGame: ObservableObject {
-    private static let hieros = ["𓁔","𓃹","𓅦","𓆣"]
+    private static let hieros = ["𓇌","𓃹","𓅦","𓆣"]
     
     private(set) var selectedCard: MultipleChoiceGame<String>.Card?
     
