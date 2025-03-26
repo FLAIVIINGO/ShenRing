@@ -16,6 +16,10 @@ class UniliteralMultipleChoiceGame: ObservableObject {
         selectedCard != nil
     }
     
+    var showNotification: Bool {
+        model.showNotification
+    }
+    
     static func createMultipleChoiceGame() -> MultipleChoiceGame<String> {
         return MultipleChoiceGame(cardContentList: hieros)
     }
@@ -30,5 +34,9 @@ class UniliteralMultipleChoiceGame: ObservableObject {
     func choose(_ card: MultipleChoiceGame<String>.Card) {
         selectedCard = card
         model.choose(card)
+    }
+    
+    func showNotificationMessage() {
+        model.showNotificationMessage()
     }
 }

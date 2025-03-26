@@ -9,6 +9,7 @@ import Foundation
 
 struct MultipleChoiceGame<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
+    private(set) var showNotification = false
     
     init(cardContentList: [CardContent]) {
         cards = []
@@ -25,6 +26,10 @@ struct MultipleChoiceGame<CardContent> where CardContent: Equatable {
                 cards[index].isSelected = (index == chosenIndex)
             }
         }
+    }
+    
+    mutating func showNotificationMessage() {
+        showNotification.toggle()
     }
     
     struct Card: Equatable, Identifiable, CustomDebugStringConvertible {

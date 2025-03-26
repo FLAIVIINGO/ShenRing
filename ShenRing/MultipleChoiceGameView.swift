@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MultipleChoiceGameView: View {
     @ObservedObject var viewModel: UniliteralMultipleChoiceGame
-    @State private var showNotification = false
     
     var body: some View {
         VStack {
@@ -29,7 +28,7 @@ struct MultipleChoiceGameView: View {
             cards
             Spacer()
             Button(action: {
-                showNotification.toggle()
+                viewModel.showNotificationMessage()
             }, label: {
                 Text("Check")
                     .frame(maxWidth: .infinity)
@@ -40,7 +39,7 @@ struct MultipleChoiceGameView: View {
         .padding()
         .overlay(
             Group {
-                if showNotification {
+                if viewModel.showNotification {
                     QuestionFeedbackView(text: "Correct!", status: true)
                 }
             }
