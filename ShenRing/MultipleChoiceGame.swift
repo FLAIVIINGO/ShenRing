@@ -10,6 +10,7 @@ import Foundation
 struct MultipleChoiceGame<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     private(set) var showNotification = false
+    private let correctId = "1"
     
     init(cardContentList: [CardContent]) {
         cards = []
@@ -17,6 +18,12 @@ struct MultipleChoiceGame<CardContent> where CardContent: Equatable {
         for cardIndex in 0..<4 {
             let content = cardContentList[cardIndex]
             cards.append(Card(content: content, id: "\(cardIndex+1)"))
+        }
+    }
+    
+    mutating func checkAnswer() {
+        for index in cards.indices {
+            cards[index].isMatched = (cards[index].id == correctId)
         }
     }
     

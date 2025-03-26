@@ -28,6 +28,7 @@ struct MultipleChoiceGameView: View {
             cards
             Spacer()
             Button(action: {
+                viewModel.checkAnswer()
                 viewModel.showNotificationMessage()
             }, label: {
                 Text("Check")
@@ -50,7 +51,7 @@ struct MultipleChoiceGameView: View {
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach(viewModel.cards) { card in
-                CardView(card)
+                CardView(card, hasChecked: viewModel.hasChecked)
                     .aspectRatio(2/3, contentMode: .fit)
                     .padding(4)
                     .onTapGesture {
@@ -64,9 +65,11 @@ struct MultipleChoiceGameView: View {
 
 struct CardView: View {
     let card: MultipleChoiceGame<String>.Card
+    let hasChecked: Bool
     
-    init(_ card: MultipleChoiceGame<String>.Card) {
+    init(_ card: MultipleChoiceGame<String>.Card, hasChecked: Bool) {
         self.card = card
+        self.hasChecked = hasChecked
     }
     
     var body: some View {
@@ -80,7 +83,19 @@ struct CardView: View {
                     .minimumScaleFactor(0.01)
                     .aspectRatio(1, contentMode: .fit)
             }
-            .foregroundColor(card.isSelected ? .blue : .black)
+            .foregroundColor(cardColor)
+        }
+    }
+    
+    private var cardColor: Color {
+        if hasChecked {
+            if card.isSelected {
+                return card.isMatched ? .green : .red
+            } else {
+                return .black
+            }
+        } else {
+            return card.isSelected ? .blue : .black
         }
     }
 }

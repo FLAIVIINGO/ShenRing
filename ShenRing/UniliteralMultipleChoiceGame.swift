@@ -9,11 +9,9 @@ import SwiftUI
 
 class UniliteralMultipleChoiceGame: ObservableObject {
     private static let hieros = ["𓇌","𓃹","𓅦","𓆣"]
-    
-    private(set) var selectedCard: MultipleChoiceGame<String>.Card?
-    
+        
     var isCheckEnabled: Bool {
-        selectedCard != nil
+        model.cards.contains(where: { $0.isSelected })
     }
     
     var showNotification: Bool {
@@ -25,6 +23,7 @@ class UniliteralMultipleChoiceGame: ObservableObject {
     }
     
     @Published private var model = createMultipleChoiceGame()
+    @Published private(set) var hasChecked = false
     
     var cards: Array<MultipleChoiceGame<String>.Card> {
         return model.cards
@@ -32,11 +31,15 @@ class UniliteralMultipleChoiceGame: ObservableObject {
     
     // MARK: - Intents
     func choose(_ card: MultipleChoiceGame<String>.Card) {
-        selectedCard = card
         model.choose(card)
     }
     
     func showNotificationMessage() {
         model.showNotificationMessage()
+    }
+    
+    func checkAnswer() {
+        hasChecked.toggle()
+        model.checkAnswer()
     }
 }
