@@ -13,8 +13,21 @@ struct MultipleChoiceGameView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Button(action: {}, label: {
+                    Image(systemName: "xmark").font(.title).foregroundColor(.black)
+                })
+                Spacer()
+                Button(action: {}, label: {
+                    Image(systemName: "ellipsis").font(.title).foregroundColor(.black)
+                })
+            }
+            Spacer()
+            RoundedRectangle(cornerRadius: 12).fill(.gray).frame(height: 12)
+            Spacer()
             Text("Which one of these is a pair of leaves?").font(.title2)
             cards
+            Spacer()
             Button(action: {
                 showNotification.toggle()
             }, label: {
