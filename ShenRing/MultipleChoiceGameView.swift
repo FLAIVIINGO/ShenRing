@@ -41,7 +41,7 @@ struct MultipleChoiceGameView: View {
         .overlay(
             Group {
                 if viewModel.showNotification {
-                    QuestionFeedbackView(text: "Correct!", status: true)
+                    QuestionFeedbackView(text: "Correct!", status: viewModel.isAnswerCorrect)
                 }
             }
                 .frame(maxHeight: .infinity, alignment: .bottom)

@@ -18,6 +18,14 @@ class UniliteralMultipleChoiceGame: ObservableObject {
         model.showNotification
     }
     
+    var selectedCard: MultipleChoiceGame<String>.Card? {
+        model.cards.first(where: { $0.isSelected })
+    }
+    
+    var isAnswerCorrect: Bool {
+        selectedCard?.isMatched == true
+    }
+    
     static func createMultipleChoiceGame() -> MultipleChoiceGame<String> {
         return MultipleChoiceGame(cardContentList: hieros)
     }
