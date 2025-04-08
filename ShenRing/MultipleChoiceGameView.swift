@@ -51,7 +51,7 @@ struct MultipleChoiceGameView: View {
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach(viewModel.cards) { card in
-                CardView(card, hasChecked: viewModel.hasChecked)
+                CardView(card, viewModel.hasChecked)
                     .aspectRatio(2/3, contentMode: .fit)
                     .padding(4)
                     .onTapGesture {
@@ -67,7 +67,7 @@ struct CardView: View {
     let card: MultipleChoiceGame<String>.Card
     let hasChecked: Bool
     
-    init(_ card: MultipleChoiceGame<String>.Card, hasChecked: Bool) {
+    init(_ card: MultipleChoiceGame<String>.Card, _ hasChecked: Bool) {
         self.card = card
         self.hasChecked = hasChecked
     }
