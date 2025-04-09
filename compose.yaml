@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: quizuser
+      POSTGRES_PASSWORD: hieratic
+      POSTGRES_DB: quizgame
+    ports:
+      - "5433:5432"
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      DB_USER: quizuser
+      DB_PASS: hieratic
+      DB_NAME: quizgame
+      DB_HOST: db
+      DB_PORT: 5432
