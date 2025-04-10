@@ -1,0 +1,12 @@
+backend/.env
+/backend/server
+.env
+pgdata/
+*.pid
+
+*.xcuserdata
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+DerivedData/
+.DS_Store
