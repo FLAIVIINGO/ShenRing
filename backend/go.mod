@@ -1,4 +1,4 @@
-module github.com/FLAIVIINGO/ShenRing
+module github.com/FLAIVIINGO/ShenRingApp
 
 go 1.22.2
 
